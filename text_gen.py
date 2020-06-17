@@ -7,8 +7,8 @@ import random
 def main():
 
     if len(sys.argv) != 3:
-        print "\tUsage:\n\t\t./text_gen.py INPUT_FILE INITIAL_PHRASE"
-        print "\t\tex: ./text_gen.py hamlet.txt \"To be\""
+        print("\nUsage:\n\t./text_gen.py INPUT_FILE INITIAL_PHRASE")
+        print("\tex: ./text_gen.py hamlet.txt \"To be\"\n")
         sys.exit()
 
     input_file = sys.argv[1]
@@ -17,14 +17,14 @@ def main():
     try:
         words = ingest_training_data(input_file)
     except Exception as e:
-        print e
+        print(e)
         sys.exit()
 
     training_data = train(words)
 
     # print_training_data(training_data)
 
-    print generate_content(training_data, initial_phrase)
+    print(generate_content(training_data, initial_phrase))
 
 
 def ingest_training_data(input_file):
@@ -36,8 +36,8 @@ def ingest_training_data(input_file):
     return words
 
 
-# TODO: Implement chain length
 def train(words):
+    # TODO: Implement custom chain length
     training_data = {}
 
     for i, word in enumerate(words):
@@ -78,7 +78,7 @@ def choose_next_word(training_data, phrase):
     chosen_index = random.randint(0, sum(possible_words.values())-1)
 
     counter = 0
-    for word, count in possible_words.iteritems():
+    for word, count in possible_words.items():
         for i in range(0, count):
             if counter == chosen_index:
                 return word
@@ -89,9 +89,9 @@ def choose_next_word(training_data, phrase):
 
 def print_training_data(training_data):
     for phrase in training_data:
-        print phrase
+        print(phrase)
         for value in training_data[phrase]:
-            print '\t{0}: {1}'.format(value, training_data[phrase][value])
+            print('\t{0}: {1}'.format(value, training_data[phrase][value]))
 
 
 if __name__ == "__main__":
